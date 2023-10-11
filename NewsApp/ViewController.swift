@@ -60,7 +60,7 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let newsCell = tableView.dequeueReusableCell(withIdentifier: "NewsArticle", for: indexPath) as? NewsArticleCell,
-        let viewModel else {
+              let viewModel else {
             return UITableViewCell()
         }
 
