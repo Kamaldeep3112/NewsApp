@@ -12,6 +12,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        URLManager.getNewsData { newsResponse in
+            print(newsResponse)
+        }
     }
 
 
