@@ -37,15 +37,15 @@ class ViewController: UIViewController {
 
     private func setupArticleList() {
         articleListTableView.register(NewsArticleCell.self, forCellReuseIdentifier: "NewsArticle")
-        articleListTableView.separatorStyle = .none
+        articleListTableView.separatorStyle = .singleLine
         articleListTableView.dataSource = self
 
         articleListTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(articleListTableView)
 
         NSLayoutConstraint.activate([
-            articleListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            articleListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            articleListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            articleListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             articleListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             articleListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])

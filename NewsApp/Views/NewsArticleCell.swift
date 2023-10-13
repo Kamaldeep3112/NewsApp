@@ -69,6 +69,7 @@ class NewsArticleCell: UITableViewCell {
         customConstraints.append(titleLabel.heightAnchor.constraint(equalToConstant: 14))
 
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
+        descriptionLabel.numberOfLines = 0
         stackView.addArrangedSubview(descriptionLabel)
         customConstraints.append(descriptionLabel.heightAnchor.constraint(equalToConstant: 50))
 
@@ -82,14 +83,15 @@ class NewsArticleCell: UITableViewCell {
     private func setupStackView() {
         stackView.axis = .vertical
         stackView.spacing = 10
+        layer.borderWidth = 2
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
         customConstraints.append(contentsOf: [
-            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
