@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         articleListTableView.register(NewsArticleCell.self, forCellReuseIdentifier: "NewsArticle")
         articleListTableView.separatorStyle = .singleLine
         articleListTableView.dataSource = self
+        articleListTableView.delegate = self
 
         articleListTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(articleListTableView)
@@ -66,5 +67,17 @@ extension ViewController: UITableViewDataSource {
 
         newsCell.configure(viewModel: viewModel.newsArticles[indexPath.row])
         return newsCell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cellViewModel = viewModel?.newsArticles[indexPath.row] else {
+            return
+        }
+
+        let detailViewController = NewsDetailViewController(urlString: cellViewModel.actionURLString)
+        show(detailViewController, sender: self)
     }
 }

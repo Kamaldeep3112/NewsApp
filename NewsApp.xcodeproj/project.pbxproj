@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		909FCE1F2AD97815000643E6 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909FCE1E2AD97815000643E6 /* NewsDetailViewController.swift */; };
 		90CA92D02AD6B4FD003D99B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CA92CF2AD6B4FD003D99B9 /* AppDelegate.swift */; };
 		90CA92D22AD6B4FD003D99B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CA92D12AD6B4FD003D99B9 /* SceneDelegate.swift */; };
 		90CA92D42AD6B4FD003D99B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CA92D32AD6B4FD003D99B9 /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		909FCE1E2AD97815000643E6 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		90CA92CC2AD6B4FD003D99B9 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90CA92CF2AD6B4FD003D99B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90CA92D12AD6B4FD003D99B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				90CA930D2AD6BE45003D99B9 /* NewsArticleCell.swift */,
+				909FCE1E2AD97815000643E6 /* NewsDetailViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				90CA930E2AD6BE45003D99B9 /* NewsArticleCell.swift in Sources */,
 				90CA93132AD6C532003D99B9 /* NewsArticleViewModel.swift in Sources */,
 				90CA92DA2AD6B4FD003D99B9 /* NewsApp.xcdatamodeld in Sources */,
+				909FCE1F2AD97815000643E6 /* NewsDetailViewController.swift in Sources */,
 				90CA93102AD6BE75003D99B9 /* NewsArticleCellViewModel.swift in Sources */,
 				90CA93032AD6B63F003D99B9 /* NewsArticleModel.swift in Sources */,
 				90CA93062AD6B69B003D99B9 /* SourceModel.swift in Sources */,

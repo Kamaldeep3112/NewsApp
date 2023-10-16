@@ -53,6 +53,7 @@ class NewsArticleCell: UITableViewCell {
     // MARK: - Private Methods
 
     private func setupUI() {
+        selectionStyle = .none
         setupStackView()
 
         // We can move these to there respective methods for setup
