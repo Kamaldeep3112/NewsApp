@@ -16,8 +16,9 @@ class NewsArticleCell: UITableViewCell {
     private let publishedAtLabel = UILabel()
     private let articleImageView = UIImageView()
 
+    private let verticalStackView = UIStackView()
+
     private var viewModel: NewsArticleCellViewModel?
-    private var stackView = UIStackView()
     private var customConstraints = [NSLayoutConstraint]()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -48,46 +49,57 @@ class NewsArticleCell: UITableViewCell {
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
         publishedAtLabel.text = viewModel.publishedAt
+
+        viewModel.loadImage { [weak self] image in
+            DispatchQueue.main.async {
+                self?.articleImageView.image = image
+            }
+        }
     }
 
     // MARK: - Private Methods
 
     private func setupUI() {
         selectionStyle = .none
-        setupStackView()
-
-        // We can move these to there respective methods for setup
-        sourceLabel.font = UIFont.systemFont(ofSize: 12)
-        stackView.addArrangedSubview(sourceLabel)
-
-        authorLabel.font = UIFont.systemFont(ofSize: 12)
-        stackView.addArrangedSubview(authorLabel)
-
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
-        stackView.addArrangedSubview(titleLabel)
-
-        descriptionLabel.font = UIFont.systemFont(ofSize: 12)
-        descriptionLabel.numberOfLines = 0
-        stackView.addArrangedSubview(descriptionLabel)
-
-        publishedAtLabel.font = UIFont.systemFont(ofSize: 12)
-        stackView.addArrangedSubview(publishedAtLabel)
-
+        setupVerticalStackView()
         NSLayoutConstraint.activate(customConstraints)
     }
 
-    private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.spacing = 10
+    private func setupVerticalStackView() {
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 10
         layer.borderWidth = 2
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackView)
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(verticalStackView)
         customConstraints.append(contentsOf: [
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+
+        // Setup Subviews
+
+        // TODO: Move these to there respective methods for setup
+        articleImageView.contentMode = .scaleAspectFit
+        customConstraints.append(articleImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 150))
+        verticalStackView.addArrangedSubview(articleImageView)
+
+        sourceLabel.font = UIFont.systemFont(ofSize: 12)
+        verticalStackView.addArrangedSubview(sourceLabel)
+
+        authorLabel.font = UIFont.systemFont(ofSize: 12)
+        verticalStackView.addArrangedSubview(authorLabel)
+
+        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        verticalStackView.addArrangedSubview(titleLabel)
+
+        descriptionLabel.font = UIFont.systemFont(ofSize: 12)
+        descriptionLabel.numberOfLines = 0
+        verticalStackView.addArrangedSubview(descriptionLabel)
+
+        publishedAtLabel.font = UIFont.systemFont(ofSize: 12)
+        verticalStackView.addArrangedSubview(publishedAtLabel)
     }
 }
