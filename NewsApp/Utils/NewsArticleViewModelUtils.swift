@@ -9,7 +9,7 @@ import Foundation
 
 struct NewsArticleViewModelUtils {
 
-    static func newsArticleViewModel(_ newsResponseModel: NewsResponseModel) -> NewsArticleViewModel {
+    static func newsArticleViewModel(_ newsResponseModel: NewsResponseModel) -> [NewsArticleCellViewModel] {
         var newsArticleCellViewModels = [NewsArticleCellViewModel]()
         for newsArticle in newsResponseModel.articles {
             let newsArticleCellViewModel = NewsArticleCellViewModel(
@@ -23,6 +23,6 @@ struct NewsArticleViewModelUtils {
             newsArticleCellViewModels.append(newsArticleCellViewModel)
         }
 
-        return NewsArticleViewModel(newsArticles: newsArticleCellViewModels)
+        return newsArticleCellViewModels
     }
 }

@@ -11,18 +11,14 @@ class ViewController: UIViewController {
 
     private let articleListTableView = UITableView()
 
-    private var viewModel: NewsArticleViewModel?
+    // TODO: Use DependencyInjection, Create a protocol and take this view model from outside
+    private var viewModel: NewsArticleViewModel = NewsArticleViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
-        URLManager.getNewsData { [weak self] newsResponse in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel = NewsArticleViewModelUtils.newsArticleViewModel(newsResponse)
-            DispatchQueue.main.async { [weak self] in
+        viewModel.fetchNews { [weak self] in
+            DispatchQueue.main.async {
                 self?.articleListTableView.reloadData()
             }
         }
@@ -56,16 +52,16 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.newsArticles.count ?? 0
+        return viewModel.numberOfNews
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let newsCell = tableView.dequeueReusableCell(withIdentifier: "NewsArticle", for: indexPath) as? NewsArticleCell,
-              let viewModel else {
+              let cellViewModel = viewModel.newsAt(index: indexPath.row) else {
             return UITableViewCell()
         }
 
-        newsCell.configure(viewModel: viewModel.newsArticles[indexPath.row])
+        newsCell.configure(viewModel: cellViewModel)
         return newsCell
     }
 }
@@ -73,7 +69,7 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cellViewModel = viewModel?.newsArticles[indexPath.row] else {
+        guard let cellViewModel = viewModel.newsAt(index: indexPath.row) else {
             return
         }
 
