@@ -11,10 +11,16 @@ class URLManager {
 
     private static let apiKey = "41215f89b5eb48c2a3ccb1c9909e017b"
     private static let baseURL = "https://newsapi.org/v2/top-headlines"
+    private static let cache = URLCache.shared
 
-    static let jsonDecoder = JSONDecoder()
+    private static let jsonDecoder = JSONDecoder()
 
     static func getNewsData(completion: @escaping (NewsResponseModel) -> Void) {
+        if let cachedData = checkCache() {
+            completion(cachedData)
+            return
+        }
+
         // Create the URL for the API request
         // TODO: Refactor it and make it generic
         if let url = URL(string: "\(baseURL)?country=us&apiKey=\(apiKey)") {
@@ -48,5 +54,22 @@ class URLManager {
             // Start the data task
             task.resume()
         }
+    }
+
+    // MARK: - Private Helpers
+
+    private static func checkCache() -> NewsResponseModel? {
+        guard let newsAPIURL = URL(string: "\(baseURL)?country=us&apiKey=\(apiKey)"),
+              let cachedResponse = cache.cachedResponse(for: URLRequest(url: newsAPIURL)) else {
+            return nil
+        }
+
+        do {
+            // Parse the JSON data
+            return try jsonDecoder.decode(NewsResponseModel.self, from: cachedResponse.data)
+        } catch {
+            print("Error parsing JSON: \(error)")
+        }
+        return nil
     }
 }
