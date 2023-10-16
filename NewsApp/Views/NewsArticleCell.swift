@@ -59,24 +59,19 @@ class NewsArticleCell: UITableViewCell {
         // We can move these to there respective methods for setup
         sourceLabel.font = UIFont.systemFont(ofSize: 12)
         stackView.addArrangedSubview(sourceLabel)
-        customConstraints.append(sourceLabel.heightAnchor.constraint(equalToConstant: 14))
 
         authorLabel.font = UIFont.systemFont(ofSize: 12)
         stackView.addArrangedSubview(authorLabel)
-        customConstraints.append(authorLabel.heightAnchor.constraint(equalToConstant: 14))
 
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         stackView.addArrangedSubview(titleLabel)
-        customConstraints.append(titleLabel.heightAnchor.constraint(equalToConstant: 14))
 
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
         descriptionLabel.numberOfLines = 0
         stackView.addArrangedSubview(descriptionLabel)
-        customConstraints.append(descriptionLabel.heightAnchor.constraint(equalToConstant: 50))
 
         publishedAtLabel.font = UIFont.systemFont(ofSize: 12)
         stackView.addArrangedSubview(publishedAtLabel)
-        customConstraints.append(publishedAtLabel.heightAnchor.constraint(equalToConstant: 14))
 
         NSLayoutConstraint.activate(customConstraints)
     }
